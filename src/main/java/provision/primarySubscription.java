@@ -12,21 +12,15 @@ public class primarySubscription<T> {
 	private serviceInfo serviceInfo;
 
 	public void setServiceIdentifier(String serviceIdentifier) {
-		if(!serviceIdentifier.isEmpty()) {
 			this.serviceIdentifier = serviceIdentifier;
-		}
 	}
 
 	public void setImsi(String imsi) {
-		if(!imsi.isEmpty()) {
 			this.imsi = imsi;
-		}
 	}
 
 	public void setSubscriptionMode(String subscriptionMode) {
-		if(!subscriptionMode.isEmpty()) {
 			this.subscriptionMode = subscriptionMode;
-		}
 	}
 
 	public void setAccountInfo(accountInfo<T> accountInfo) {

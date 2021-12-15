@@ -9,20 +9,24 @@ public class TestData {
 	protected static String country = "Norway";
 
 	//// Optional preferences Data
-	protected static String brandInfo = "Sonera";
-	protected static String channel = "sms";
-	protected static String tcId = "121313";
+	protected static String brandInfo = "teliano";
+	protected static String phoneroBrandInfo = "phonero";
+	protected static String channel = "SMS";
+	protected static String emailChannel = "Email";
+	protected static String notificationPrice = "10.20";
 
 	// Optional notifications Data
-	protected static int on = 1;
-	protected static int off = 0;
+	public static int on = 1;
+	public static int off = 0;
 
 	// Mandatory accountInfo Data
 	protected static String customerType = "Consumer";
 	protected static String M2MCustomerType = "M2M";
-	protected static int bdom = 28;
+	protected static int bdom = 1;
 	protected static String billingFrequency = "Monthly";
-	protected static int invalidBdom = 29;
+	protected static String invalidBillingFrequency = "Quarterly";
+	protected static int validBdom = 7;
+	protected static int invalidBdom = 12;
 	protected static String invalidCustomerType = "Invalid";
 	protected static String invalidData = "One";
 
@@ -32,18 +36,21 @@ public class TestData {
 	protected static String language = "ENG";
 	protected static String emailAddress = "asurasan@outlook.com";
 	protected static String invalidEmailAddress = "asurasan";
+	protected static String tcId = "iol406";
 
 	// Mandatory Subscription Data
 	protected static String subscriptionMode = "postpaid";
+	protected static String prepaidSubscriptionMode = "prepaid";
 	protected static String existingServiceIdentifier = "1000";
 	protected static String existingImsi = "1001";
 	protected static String invalidSubscriptionMode = "Invalid";
 	
 	//Mandatory Bundle Data
-	protected static String bundleCode = "NOMT-B-N124_NC300_N1014_NoRLH-2127";
-	protected static String roamingBundleCode = "FGM";
-	protected static String RCCBundleCode = "RCC";
-	protected static String topupBundleCode = "GED";
+	public static String bundleCode = "B0001";
+	public static String roamingBundleCode = "Roam0001";
+	public static String RCCBundleCode = "RCC0001";
+	public static String topupBundleCode = "TopUp0008";
+	public static String addOnBundleCode = "Addon0005";
 	protected static String invalidCode = "000";
 	
 	//Mandatory Bundle Properties Data

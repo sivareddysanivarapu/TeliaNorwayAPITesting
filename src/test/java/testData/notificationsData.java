@@ -45,12 +45,19 @@ public class notificationsData extends TestData{
 		return input;
 	}
 	
-	public static notifications missingBaring() {
+	public static notifications missingBarring() {
 
 		notifications input = new notifications();
 		input.setDomesticNotifyEnabled(on);
 		input.setRccNotifyEnabled(off);
 		input.setRoamingNotifyEnabled(off);
+		
+		return input;
+	}
+	
+	public static notifications defaultNotifications() {
+
+		notifications input = new notifications();
 		
 		return input;
 	}

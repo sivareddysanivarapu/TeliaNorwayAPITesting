@@ -9,6 +9,7 @@ public class preferences {
 	private String subscriptionType;
 	private String language;
 	private String emailAddress;
+	private String notificationPrice;
 	private String brandInfo;
 	private String tcId;
 	private String channel;
@@ -32,6 +33,11 @@ public class preferences {
 	public void setEmailAddress(String emailAddress) {
 		if(!emailAddress.isEmpty()) {
 			this.emailAddress = emailAddress;
+		}
+	}
+	public void setNotificationPrice(String notificationPrice) {
+		if(!notificationPrice.isEmpty()) {
+			this.notificationPrice = notificationPrice;
 		}
 	}
 	public void setBrandInfo(String brandInfo) {
@@ -65,6 +71,9 @@ public class preferences {
 	}
 	public String getEmailAddress() {
 		return emailAddress;
+	}
+	public String getNotificationPrice() {
+		return notificationPrice;
 	}
 	public String getBrandInfo() {
 		return brandInfo;

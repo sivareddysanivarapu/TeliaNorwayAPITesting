@@ -81,18 +81,6 @@ public class accountInfoData extends TestData{
 		return input;
 	}
 	
-	public static accountInfo<Integer> invalidBDOM() {
-		accountInfo<Integer> input = new accountInfo<Integer>();
-		input.setAddress(address);
-		input.setBdom(invalidBdom);
-		input.setBillingFrequency(billingFrequency);
-		input.setCity(city);
-		input.setCountry(country);
-		input.setCustomerType(customerType);
-		input.setLastName(lastName);
-		return input;
-	}
-	
 	public static accountInfo<Integer> invalidCustomerType() {
 		accountInfo<Integer> input = new accountInfo<Integer>();
 		input.setAddress(address);
@@ -102,6 +90,59 @@ public class accountInfoData extends TestData{
 		input.setCountry(country);
 		input.setCustomerType(invalidCustomerType);
 		input.setLastName(lastName);
+		return input;
+	}
+	
+	public static accountInfo<Integer> prepaidData() {
+		accountInfo<Integer> input = new accountInfo<Integer>();
+		input.setAddress(address);
+		input.setCity(city);
+		input.setCountry(country);
+		input.setCustomerType(customerType);
+		input.setLastName(lastName);
+		return input;
+	}
+	
+	public static accountInfo<Integer> BDOM(String bdomType) {
+		accountInfo<Integer> input = new accountInfo<Integer>();
+		input.setAddress(address);
+		input.setBdom(validBdom);
+		input.setBillingFrequency(billingFrequency);
+		input.setCity(city);
+		input.setCountry(country);
+		input.setCustomerType(customerType);
+		input.setLastName(lastName);
+		if(bdomType == "validBDOM") {
+			input.setBdom(validBdom);
+		} else if(bdomType == "invalidBDOM") {
+			input.setBdom(invalidBdom);
+		}
+		return input;
+	}
+	
+	public static accountInfo<Integer> quarterlyFrequency() {
+		accountInfo<Integer> input = new accountInfo<Integer>();
+		input.setAddress(address);
+		input.setBdom(bdom);
+		input.setBillingFrequency(invalidBillingFrequency);
+		input.setCity(city);
+		input.setCountry(country);
+		input.setCustomerType(customerType);
+		input.setLastName(lastName);
+		return input;
+	}
+	
+	public static accountInfo<Integer> withoutBDOM() {
+		accountInfo<Integer> input = new accountInfo<Integer>();
+		input.setBillingFrequency(billingFrequency);
+		input.setCustomerType(customerType);
+		return input;
+	}
+	
+	public static accountInfo<Integer> withoutBillingFrequency() {
+		accountInfo<Integer> input = new accountInfo<Integer>();
+		input.setBdom(bdom);
+		input.setCustomerType(customerType);
 		return input;
 	}
 	

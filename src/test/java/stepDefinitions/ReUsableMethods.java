@@ -35,8 +35,8 @@ public class ReUsableMethods{
 	public static RequestSpecification OAMHeader() throws IOException {
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt", true));
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
-				.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
-				.addFilter(RequestLoggingFilter.logRequestTo(log))
+				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
+				//.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log))
 				.setContentType(ContentType.JSON).build();
 	}
@@ -44,7 +44,7 @@ public class ReUsableMethods{
 	public static RequestSpecification givenHeader() throws IOException {
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt", true));
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
-				.addHeader("orderId", getOrderID())
+				//.addHeader("orderId", getOrderID())
 				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
 				//.addHeader("access_token", stepDefinition.accessToken)
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
@@ -55,8 +55,8 @@ public class ReUsableMethods{
 	public static RequestSpecification modifyHeader() throws IOException {
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt", true));
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
-				.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
-				.addHeader("access_token", stepDefinition.accessToken)
+				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
+				//.addHeader("access_token", stepDefinition.accessToken)
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log))
 				.setContentType(ContentType.JSON).build();
@@ -65,8 +65,8 @@ public class ReUsableMethods{
 	public static RequestSpecification onlyHeader() throws IOException {
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt", true));
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
-				.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
-				.addHeader("access_token", stepDefinition.accessToken)
+				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
+				//.addHeader("access_token", stepDefinition.accessToken)
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log)).build();
 	}
@@ -74,8 +74,8 @@ public class ReUsableMethods{
 	public static RequestSpecification getHeader() throws IOException {
 		PrintStream log = new PrintStream(new FileOutputStream("logging.txt", true));
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
-				.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
-				.addHeader("access_token", stepDefinition.accessToken)
+				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
+				//.addHeader("access_token", stepDefinition.accessToken)
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log)).build();
 	}
@@ -123,7 +123,7 @@ public class ReUsableMethods{
 	
 	public static String getAPI(String key) {
 		
-		String api = "/api/v1";
+		String api = "/apilayer/v1";
 		switch(key) {
 		case "OAM":
 			key = api + "/accessToken";
