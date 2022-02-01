@@ -14,7 +14,7 @@ Feature: Change Service Identifier of a Subscription
     	|TC202|"Invalid"     |"ERR1001"|"Invalid"  |Primary   |
     	|TC203|"Existing"    |"ERR3021"|"Existing" |Primary   |
     	|TC205|"Invalid"     |"ERR1001"|"Missing"  |Primary   |
-    	|TC208|"Invalid"     |"ERR1001"|"Blank"    |Primary   |
+    	|TC208|"Invalid"     |"ERR1001"|"Blank"    |Blank     |
     	
     @SecondarySubscription
     Examples:
@@ -29,7 +29,7 @@ Feature: Change Service Identifier of a Subscription
     @ModifyServiceIdentifier
     Examples:
     	|TC   |Validity      |errorCode|newValidity|Identifier|
-    	|TC209|"Valid"       |"ERR3023"|"Inactive" |blank     |
+    	|TC209|"Inactive"    |"ERR3021"|"Valid"    |Old       |
   
   @ChangeServiceIdentifier @Drop1
   Scenario: TC204 Change Service Identifier of Subscription with missing Old Service Identifier

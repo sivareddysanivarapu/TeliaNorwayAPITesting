@@ -9,9 +9,9 @@ public class ChangeServiceIdentifier_Data {
 		
 		changeServiceIdentifierRequest input = new changeServiceIdentifierRequest();
 		
-		if(testCase == " ")
+		if(testCase == " ") {
 			input.setNewServiceIdentifier(ReUsableMethods.getCurrentDateTimeMS() + "7");
-		else if(testCase == "TC202")
+		} else if(testCase == "TC202")
 			input.setNewServiceIdentifier(ReUsableMethods.getCurrentDateTimeMS() + "756");
 		else if(testCase == "TC203")
 			input.setNewServiceIdentifier(predata[0]);

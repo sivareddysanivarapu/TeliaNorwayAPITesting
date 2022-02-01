@@ -51,6 +51,7 @@ public class stepDefinition extends ReUsableMethods {
 		req = given().spec(givenHeader()).body(inputRequest);
 		primaryServiceIdentifier = inputRequest.getSubscription().getServiceIdentifier();
 		imsi = inputRequest.getSubscription().getImsi();
+		alternateNumber = inputRequest.getSubscription().getServiceInfo().getPreferences().getAlternateNumber();
 	}
 
 	@Given("Input Provision Request with invalid {string}")
@@ -153,9 +154,9 @@ public class stepDefinition extends ReUsableMethods {
 			inputRequest = Provision_Data.inputRequestPayload("TC028");
 		else if (string.contentEquals("RCC"))
 			inputRequest = Provision_Data.inputRequestPayload("TC029");
-		else if(string.contentEquals("baseRoaming"))
+		else if (string.contentEquals("baseRoaming"))
 			inputRequest = Provision_Data.inputRequestPayload("TC239");
-		else if(string.contentEquals("baseRcc"))
+		else if (string.contentEquals("baseRcc"))
 			inputRequest = Provision_Data.inputRequestPayload("TC240");
 		req = given().spec(givenHeader()).body(inputRequest);
 		primaryServiceIdentifier = inputRequest.getSubscription().getServiceIdentifier();
@@ -283,34 +284,21 @@ public class stepDefinition extends ReUsableMethods {
 		imsi = inputRequest.getImsi();
 	}
 
-	@Given("Input AddRCCBundle Request with {string} bundleCode and {string} {string}")
-	public void input_addrccbundle_request_with_bundlecode_and(String validBundle, String parameter, String optional)
-			throws IOException {
+	@Given("Input AddRCCBundle Request with {string} bundleCode")
+	public void input_addrccbundle_request_with_bundlecode(String validBundle) throws IOException {
 		addRCCBundleRequest inputRequest = null;
-		switch (parameter) {
-		case "with":
-			if (optional.contentEquals("properties"))
-				inputRequest = AddRCCBundle_Data.inputRequestPayload("TC066", validBundle);
-			break;
-		case "without":
-			if (optional.contentEquals("properties")) {
-				inputRequest = AddRCCBundle_Data.inputRequestPayload("TC067", validBundle);
-				switch (validBundle) {
-				case "Invalid":
-					inputRequest = AddRCCBundle_Data.inputRequestPayload("TC069", validBundle);
-					break;
-				case "Roaming":
-					inputRequest = AddRCCBundle_Data.inputRequestPayload("TC070", validBundle);
-					break;
-				case "no":
-					inputRequest = AddRCCBundle_Data.inputRequestPayload("TC076", validBundle);
-					break;
-				}
-			} else
-				inputRequest = AddRCCBundle_Data.inputRequestPayload("TC074", validBundle);
+		switch (validBundle) {
+		case "RCC":
+			inputRequest = AddRCCBundle_Data.inputRequestPayload("TC066", validBundle);
 			break;
 		case "Invalid":
-			inputRequest = AddRCCBundle_Data.inputRequestPayload("TC075", validBundle);
+			inputRequest = AddRCCBundle_Data.inputRequestPayload("TC069", validBundle);
+			break;
+		case "Roaming":
+			inputRequest = AddRCCBundle_Data.inputRequestPayload("TC070", validBundle);
+			break;
+		case "no":
+			inputRequest = AddRCCBundle_Data.inputRequestPayload("TC076", validBundle);
 			break;
 		}
 		req = given().spec(givenHeader()).body(inputRequest);
@@ -450,8 +438,11 @@ public class stepDefinition extends ReUsableMethods {
 			else if (Validity.contentEquals("Missing"))
 				output = req.when().post(getAPI("Subscription") + getAPI("Bundle")).then().spec(notFoundResponse())
 						.extract().response();
-			else if (Validity.contentEquals("Inactive") || Validity.contentEquals("Non-existant"))
+			else if (Validity.contentEquals("Inactive") || Validity.contentEquals("Existing"))
 				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
+						.spec(existingResponse()).extract().response();
+			else if (Validity.contentEquals("Non-existant"))
+				output = req.when().post(getAPI("Subscription") + "000" + getAPI("Bundle")).then()
 						.spec(existingResponse()).extract().response();
 
 			break;
@@ -461,45 +452,58 @@ public class stepDefinition extends ReUsableMethods {
 						.spec(successResponse()).extract().response();
 			else if (Validity.contentEquals("Server"))
 				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
-				.spec(serverResponse()).extract().response();
+						.spec(serverResponse()).extract().response();
 			else if (Validity.contentEquals("Inactive"))
 				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
-				.spec(existingResponse()).extract().response();
+						.spec(existingResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
 				output = req.when().get(getAPI("Subscription") + "0000" + getAPI("Bundle")).then()
-				.spec(existingResponse()).extract().response();
+						.spec(existingResponse()).extract().response();
 			else if (Validity.contentEquals("Missing"))
-				output = req.when().get(getAPI("Subscription") + getAPI("Bundle")).then()
-				.spec(notFoundResponse()).extract().response();
+				output = req.when().get(getAPI("Subscription") + getAPI("Bundle")).then().spec(notFoundResponse())
+						.extract().response();
 			break;
 		case "DeleteBundle":
 			if (Validity.contentEquals("Valid Roaming"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + testData.TestData.roamingBundleCode).then()
-						.spec(deleteResponse()).extract().response();
-			else if (Validity.contentEquals("Valid AddOn"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + testData.TestData.addOnBundleCode).then()
-						.spec(deleteResponse()).extract().response();
+				output = req.when()
+						.delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+								+ testData.TestData.roamingBundleCode)
+						.then().spec(deleteResponse()).extract().response();
+			else if (Validity.contentEquals("AddOn"))
+				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+						+ testData.TestData.addOnBundleCode).then().spec(bundleResponse()).extract().response();
 			else if (Validity.contentEquals("Base"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + testData.TestData.bundleCode).then()
-						.spec(bundleResponse()).extract().response();
-			else if (Validity.contentEquals("RCC") || Validity.contentEquals("Conflict"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + testData.TestData.RCCBundleCode).then()
-						.spec(existingResponse()).extract().response();
+				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+						+ testData.TestData.bundleCode).then().spec(bundleResponse()).extract().response();
+			else if (Validity.contentEquals("RCC"))
+				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+						+ testData.TestData.RCCBundleCode).then().spec(bundleResponse()).extract().response();
+			else if (Validity.contentEquals("Conflict"))
+				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+						+ testData.TestData.RCCBundleCode).then().spec(existingResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + "ABC").then()
-						.spec(failureResponse()).extract().response();
+				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + "ABC")
+						.then().spec(failureResponse()).extract().response();
 			else if (Validity.contentEquals("Inactive"))
-				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + testData.TestData.roamingBundleCode).then()
-						.spec(existingResponse()).extract().response();
+				output = req.when()
+						.delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
+								+ testData.TestData.roamingBundleCode)
+						.then().spec(existingResponse()).extract().response();
 			else if (Validity.contentEquals("Missing Bundle"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
 						.spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Missing serviceIdentifier"))
-				output = req.when().delete(getAPI("Subscription") + "bundles/" + testData.TestData.roamingBundleCode).then()
-						.spec(notFoundResponse()).extract().response();
+				output = req.when().delete(getAPI("Subscription") + "bundles/" + testData.TestData.roamingBundleCode)
+						.then().spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Non-existant"))
-				output = req.when().delete(getAPI("Subscription") + "000" + getAPI("Bundle") + testData.TestData.roamingBundleCode).then()
-						.spec(existingResponse()).extract().response();
+				output = req.when()
+						.delete(getAPI("Subscription") + "000" + getAPI("Bundle") + testData.TestData.roamingBundleCode)
+						.then().spec(existingResponse()).extract().response();
+			break;
+		case "GetSubscription":
+			if (Validity.contentEquals("Valid"))
+				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier).then()
+						.spec(successResponse()).extract().response();
 			break;
 		}
 	}
@@ -613,12 +617,10 @@ public class stepDefinition extends ReUsableMethods {
 				assertEquals("Active", responseBody1.getRccBundle().get(0).getStatus());
 				assertEquals(testData.TestData.off, responseBody1.getRccBundle().get(0).getNotifications());
 				assertEquals("RCC", responseBody1.getRccBundle().get(0).getBundleType());
-				assertEquals(testData.TestData.RCCBundleCode,
-						responseBody1.getRccBundle().get(0).getBundleCode());
+				assertEquals(testData.TestData.RCCBundleCode, responseBody1.getRccBundle().get(0).getBundleCode());
 			}
 			break;
 		}
-
 	}
 
 	@Then("Validate the status and error in output response")

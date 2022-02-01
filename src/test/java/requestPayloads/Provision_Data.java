@@ -124,7 +124,7 @@ public class Provision_Data extends TestData {
 		}
 		
 		if (testCase == "TC005" || testCase == "TC048" || testCase == "TC049"
-				|| testCase == "TC050") {
+				|| testCase == "TC050" || testCase == "TC032") {
 			inputSubscription.setImsi(null);
 		} else if (testCase == "TC008") {
 			inputSubscription.setImsi(ReUsableMethods.getCurrentDateTimeMS() + "123");

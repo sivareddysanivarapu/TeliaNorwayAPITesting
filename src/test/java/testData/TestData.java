@@ -3,43 +3,43 @@ package testData;
 public class TestData {
 	
 	// Optional accountInfo Data
-	protected static String lastName = "Surasani";
-	protected static String address = "Hyd";
-	protected static String city = "Norway";
-	protected static String country = "Norway";
+	public static String lastName = "Surasani";
+	public static String address = "Hyd";
+	public static String city = "Norway";
+	public static String country = "Norway";
 
 	//// Optional preferences Data
-	protected static String brandInfo = "teliano";
-	protected static String phoneroBrandInfo = "phonero";
-	protected static String channel = "SMS";
-	protected static String emailChannel = "Email";
-	protected static String notificationPrice = "10.20";
+	public static String brandInfo = "teliano";
+	public static String phoneroBrandInfo = "phonero";
+	public static String channel = "SMS";
+	public static String emailChannel = "Email";
+	public static String notificationPrice = "10.20";
 
 	// Optional notifications Data
 	public static int on = 1;
 	public static int off = 0;
 
 	// Mandatory accountInfo Data
-	protected static String customerType = "Consumer";
-	protected static String M2MCustomerType = "M2M";
-	protected static int bdom = 1;
-	protected static String billingFrequency = "Monthly";
-	protected static String invalidBillingFrequency = "Quarterly";
-	protected static int validBdom = 7;
-	protected static int invalidBdom = 12;
+	public static String customerType = "Consumer";
+	public static String M2MCustomerType = "M2M";
+	public static int bdom = 1;
+	public static String billingFrequency = "Monthly";
+	public static String invalidBillingFrequency = "Quarterly";
+	public static int validBdom = 7;
+	public static int invalidBdom = 12;
 	protected static String invalidCustomerType = "Invalid";
 	protected static String invalidData = "One";
 
 	// Mandatory preferences Data
-	protected static String serviceProviderId = "TS";
-	protected static String subscriptionType = "1";
-	protected static String language = "ENG";
-	protected static String emailAddress = "asurasan@outlook.com";
-	protected static String invalidEmailAddress = "asurasan";
-	protected static String tcId = "iol406";
+	public static String serviceProviderId = "TS";
+	public static String subscriptionType = "1";
+	public static String language = "ENG";
+	public static String emailAddress = "asurasan@outlook.com";
+	public static String invalidEmailAddress = "asurasan";
+	public static String tcId = "iol406";
 
 	// Mandatory Subscription Data
-	protected static String subscriptionMode = "postpaid";
+	public static String subscriptionMode = "postpaid";
 	protected static String prepaidSubscriptionMode = "prepaid";
 	protected static String existingServiceIdentifier = "1000";
 	protected static String existingImsi = "1001";
@@ -50,7 +50,8 @@ public class TestData {
 	public static String roamingBundleCode = "Roam0001";
 	public static String RCCBundleCode = "RCC0001";
 	public static String topupBundleCode = "TopUp0008";
-	public static String addOnBundleCode = "Addon0005";
+	public static String roamTopupBundleCode = "TopUp0008";
+	public static String addOnBundleCode = "AddOn0005";
 	protected static String invalidCode = "000";
 	
 	//Mandatory Bundle Properties Data

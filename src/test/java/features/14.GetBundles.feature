@@ -2,11 +2,11 @@ Feature: Get Bundles for Active Subscription
 
 	@GetBundles @Drop1
 	Scenario Outline: <TC> GetBundles by providing valid serviceIdentifier and <bundleType> bundle
-		And Input Get Request 
-		And "GetBundles" API is called with "Valid" attributes
+		Given Input Get Request 
+		When "GetBundles" API is called with "Valid" attributes
     Then Validate the "GetBundles" output response
     
-    @PrimarySubscription
+    @onlyBase
     Examples:
     	|TC   |bundleType|
    		|TC238|only Base |
@@ -33,8 +33,8 @@ Feature: Get Bundles for Active Subscription
    		
   @GetBundles @Drop1
 	Scenario Outline: <TC> GetBundles by providing <Identifier> serviceIdentifier and <bundleType> bundle
-		And Input Get Request 
-		And "GetBundles" API is called with <Validity> attributes
+		Given Input Get Request 
+		When "GetBundles" API is called with <Validity> attributes
     Then Validate the <errorCode> code, status and message in "GetBundles" output response
     
     @SecondarySubscription

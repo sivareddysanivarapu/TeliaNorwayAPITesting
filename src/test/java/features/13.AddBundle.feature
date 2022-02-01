@@ -1,7 +1,7 @@
 Feature: Purchase Base/Roaming/Addon Bundles
 
 	@AddBundle @Drop1
-	Scenario Outline: <TC> AddBundle by providing valid serviceIdentifier and <bundleType> bundle
+	Scenario Outline: <TC> AddBundle by providing <Identifier> serviceIdentifier and <bundleType> bundle
 		Given Input Request with <bundleType> bundle <with/without> properties
 		When "AddBundle" API is called with <valid> attributes
 		Then Validate the <errorCode> code, status and message in "AddBundle" output response
@@ -32,15 +32,24 @@ Feature: Purchase Base/Roaming/Addon Bundles
 	@AddBundle @PrimarySubscription @Drop1
 	Scenario Outline: <TC> AddBundle by providing valid serviceIdentifier and multiple <bundleType> bundle
 		Given Input Request with <bundleType> bundle <with/without> properties
+		When "AddBundle" API is called with <newValid> attributes
+		Then Validate the <errorCode> code, status and message in "AddBundle" output response
+		
+		Examples:
+			|TC   |bundleType|errorCode|with/without|newValid  |
+			|TC222|"Base"    |"ERR3027"|"without"   |"Existing"|
+			|TC224|"Roaming" |"ERR3028"|"without"   |"Existing"|
+			
+	@AddBundle @PrimarySubscription @Drop1
+	Scenario Outline: <TC> AddBundle by providing valid serviceIdentifier and multiple <bundleType> bundle
+		Given Input Request with <bundleType> bundle <with/without> properties
 		When "AddBundle" API is called with <valid> attributes
 		And "AddBundle" API is called with <newValid> attributes
 		Then Validate the <errorCode> code, status and message in "AddBundle" output response
 		
 		Examples:
-			|TC   |bundleType|errorCode|with/without|valid    |newValid|
-			|TC222|"Base"    |"000"    |"without"   |"Valid"  |"Valid" |
-			|TC224|"Roaming" |"000"    |"without"   |"Valid"  |"Valid" |
-			|TC225|"AddOn"   |"ERR2020"|"with"      |"Valid"  |"Server"|
+			|TC   |bundleType|errorCode|with/without|valid    |newValid  |
+			|TC225|"AddOn"   |"ERR2020"|"with"      |"Valid"  |"Server"  |
 			
 	@AddBundle @Drop1
 	Scenario: TC230 AddBundle without providing valid serviceIdentifier

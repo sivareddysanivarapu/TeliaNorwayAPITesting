@@ -26,8 +26,8 @@ public class Hooks {
 	public static void primarySubscription() throws IOException {
 		Decorators.prerequisiteStart();
 		stepDefinition m = new stepDefinition();
-		//m.input_provision_request_bundle_group("with");
-		m.input_provision_request_for_with_attributes("teliano", "Mandatory");
+		m.input_provision_request_bundle_group("with");
+		//m.input_provision_request_for_with_attributes("teliano", "Mandatory");
 		m.api_is_called_with_attributes("Provision", "Valid");
 		m.validate_the_code_status_and_message_in_output_response("000", "Provision");
 		Decorators.prerequisiteEnd();
@@ -35,7 +35,7 @@ public class Hooks {
 
 	@Before("@SecondarySubscription")
 	public static void secondarySubscription() throws IOException {
-		Hooks.primarySubscription();
+		Hooks.onlyBase();
 		Decorators.prerequisiteStart();
 		stepDefinition m = new stepDefinition();
 		m.input_addsubscription_request_with_attributes(" ");
@@ -85,6 +85,26 @@ public class Hooks {
 		Decorators.prerequisiteEnd();
 	}
 
+	@Before("@onlyMandatory")
+	public static void onlyMandatory() throws IOException {
+		Decorators.prerequisiteStart();
+		stepDefinition m = new stepDefinition();
+		m.input_provision_request_for_with_attributes("teliano", "noOptional");
+		m.api_is_called_with_attributes("Provision", "Valid");
+		m.validate_the_code_status_and_message_in_output_response("000", "Provision");
+		Decorators.prerequisiteEnd();
+	}
+	
+	@Before("@onlyBase")
+	public static void onlyBase() throws IOException {
+		Decorators.prerequisiteStart();
+		stepDefinition m = new stepDefinition();
+		m.input_provision_request_for_with_attributes("teliano", "Mandatory");
+		m.api_is_called_with_attributes("Provision", "Valid");
+		m.validate_the_code_status_and_message_in_output_response("000", "Provision");
+		Decorators.prerequisiteEnd();
+	}
+	
 	@Before("@BaseRoaming")
 	public static void baseRoaming() throws IOException {
 		Decorators.prerequisiteStart();

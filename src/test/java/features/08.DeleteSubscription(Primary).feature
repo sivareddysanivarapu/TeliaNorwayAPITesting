@@ -1,17 +1,17 @@
 Feature: Delete Primary Subscription
 
-	@DeleteSubscription @PrimarySubscription @Drop1
+	@DeleteSubscription @PrimarySubscription
 	Scenario: TC156 Delete Subscription by providing valid attributes
 		Given Input Delete Request
 		When "DeleteSubscription" API is called with "Valid" attributes
 		
-	@DeleteSubscription @PrimarySubscription @Drop1
+	@DeleteSubscription @PrimarySubscription
 	Scenario: TC157 Delete Subscription without providing attributes
 		Given Input Delete Request
 		When "DeleteSubscription" API is called with "no" attributes
 		Then Validate the status and error in output response
 		
-	@DeleteSubscription @CancelSubscription @Drop1
+	@DeleteSubscription @CancelSubscription
 	Scenario Outline: <TC> Delete Subscription with providing <Identifier> attributes
 		Given Input Delete Request
 		When "DeleteSubscription" API is called with <Validity> attributes

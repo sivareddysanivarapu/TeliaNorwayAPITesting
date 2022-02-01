@@ -1,49 +1,46 @@
 Feature: Purchase RCC Bundle
 
-	@AddRCCBundle @PrimarySubscription
-	Scenario Outline: <TC> Purchase RCC Bundle with <validBundle> bundleCode and <with/without> <optionalFields>
-		Given Input AddRCCBundle Request with <validBundle> bundleCode and <with/without> <optionalFields>
+	@AddRCCBundle @onlyBase
+	Scenario Outline: <TC> Purchase RCC Bundle with <validBundle> bundleCode
+		Given Input AddRCCBundle Request with <validBundle> bundleCode
 		When "AddRCCBundle" API is called with <Validity> attributes
     Then Validate the <errorCode> code, status and message in "AddRCCBundle" output response
     
     Examples:
-    	|TC   |Validity |validBundle|with/without|optionalFields|errorCode|
-    	|TC066|"Valid"  |"RCC"      |"with"      |"properties"  |"000"    |
-    	|TC067|"Valid"  |"RCC"      |"without"   |"properties"  |"000"    |
-    	|TC069|"Invalid"|"Invalid"  |"without"   |"properties"  |"ERR1001"|
-    	|TC070|"Invalid"|"Roaming"  |"without"   |"properties"  |"ERR1001"|
-    	|TC074|"Valid"  |"RCC"      |"without"   |"limit"       |"000"    |
-    	|TC075|"Invalid"|"RCC"      |"Invalid"   |"limit"       |"ERR1001"|
-    	|TC076|"Invalid"|"no"       |"without"   |"properties"  |"ERR1001"|
+    	|TC   |Validity |validBundle|errorCode|
+    	|TC066|"Valid"  |"RCC"      |"000"    |
+    	|TC069|"Invalid"|"Invalid"  |"ERR1001"|
+    	|TC070|"Invalid"|"Roaming"  |"ERR1001"|
+    	|TC076|"Invalid"|"no"       |"ERR1001"|
     	
   @AddRCCBundle
   Scenario: TC068 Purchase RCC Bundle without providing serviceIdentifier in path parameter
-  	Given Input AddRCCBundle Request with "RCC" bundleCode and "without" "properties"
+  	Given Input AddRCCBundle Request with "RCC" bundleCode
 		When "AddRCCBundle" API is called with "Missing" attributes
     Then Validate the status and error in output response
     
-  @AddRCCBundle @InactiveSubscription
+  @AddRCCBundle
   Scenario Outline: <TC> Purchase RCC Bundle with providing <Validity> serviceIdentifier in path parameter
-  	Given Input AddRCCBundle Request with "RCC" bundleCode and "without" "properties"
+  	Given Input AddRCCBundle Request with "RCC" bundleCode
 		When "AddRCCBundle" API is called with <Valid> attributes
-    Then Validate the "ERR3023" code, status and message in "AddRCCBundle" output response
+    Then Validate the <errorCode> code, status and message in "AddRCCBundle" output response
     
-    @InactiveSubscription
+    @CancelSubscription
     Examples:
-    	|TC   |Validity|Valid     |
-    	|TC071|Inactive|"Inactive"|
+    	|TC   |Validity|Valid     |errorCode|
+    	|TC071|Inactive|"Inactive"|"ERR3023"|
     	
     @SecondarySubscription
     Examples:
-    	|TC   |Validity |Valid    |
-    	|TC072|Secondary|"Invalid"|
+    	|TC   |Validity |Valid    |errorCode|
+    	|TC072|Secondary|"Invalid"|"ERR3023"|
     	
     Examples:
-    	|TC   |Validity    |Valid         |
-    	|TC073|Non-existant|"Non-existant"|
+    	|TC   |Validity    |Valid         |errorCode|
+    	|TC073|Non-existant|"Non-existant"|"ERR3023"|
     	
-    @PurchaseRCCBundle
+    @PrimarySubscription
     Examples:
-    	|TC   |Validity|Valid     |
-    	|TC077|Existing|"Existant"|
+    	|TC   |Validity|Valid     |errorCode|
+    	|TC077|Existing|"Existant"|"ERR3029"|
    

@@ -18,18 +18,6 @@ public class AddRCCBundle_Data extends TestData {
 			input.setBundleCode(roamingBundleCode);
 		}
 		
-		properties p = new properties();
-		if(testCase.contentEquals("TC066")) {
-			p.setLimit(60.4567);
-			input.setProperties(p);
-		} else if(testCase.contentEquals("TC074")) {
-			input.setProperties(p);
-		} else if(testCase.contentEquals("TC075")) {
-			p.setLimit(-60.4567);
-			input.setProperties(p);
-		}
-		
-		
 		return input;
 		
 	}

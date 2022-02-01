@@ -9,7 +9,6 @@ Feature: Delete Base/Roaming/AddOn bundles
 		Examples:
 			|TC   |bundleType     |
 			|TC255|"Valid Roaming"|
-			|TC268|"Valid AddOn"  |
 			
 	@DeleteBundle @Drop1
 	Scenario Outline: <TC> DeleteBundle by providing <Validity> service identifier and <bundleType> Bundle code
@@ -21,18 +20,22 @@ Feature: Delete Base/Roaming/AddOn bundles
 		Examples:
 			|TC   |bundleType|Validity|valid    |errorCode|
 			|TC257|Base      |Valid   |"Base"   |"ERR1026"|
-			|TC264|RCC       |Valid   |"RCC"    |"ERR3024"|
+			|TC264|RCC       |Valid   |"RCC"    |"ERR1027"|
 			|TC265|Invalid   |Valid   |"Invalid"|"ERR1001"|
-			
-		@SecondarySubscription
-		Examples:
-			|TC   |bundleType|Validity|valid     |errorCode|
-			|TC266|No        |Valid   |"Conflict"|"ERR3024"|
 			
 		@CancelBundle
 		Examples:
 			|TC   |bundleType|Validity|valid     |errorCode|
-			|TC263|Inactive  |Valid   |"Inactive"|"ERR3025"|	
+			|TC263|Inactive  |Valid   |"Inactive"|"ERR3025"|
+			
+		@SecondarySubscription
+		Examples:
+			|TC   |bundleType|Validity|valid     |errorCode|
+			|TC266|No        |Valid   |"Conflict"|"ERR3024"|	
+			
+		@BundleGroup
+		Examples:
+			|TC268|AddOn     |Valid   |"AddOn"  |"ERR1044"|
 			
 	@DeleteBundle @Drop1
 	Scenario Outline: <TC> DeleteBundle by providing <Validity> service identifier and <bundleType> Bundle code

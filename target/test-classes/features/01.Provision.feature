@@ -20,7 +20,7 @@ Feature: Provision Subscription with Bundles
     
     Examples:
     	|TC   |function  |Validity      |errorCode|
-    	|TC002|"dataType"|"Invalid"     |"ERR1000"|
+    	|TC003|"dataType"|"Invalid"     |"ERR1000"|
     	|TC033|"bundle"  |"Non-existing"|"ERR2007"|
     
   @Provision @Drop1
