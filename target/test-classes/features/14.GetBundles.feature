@@ -31,25 +31,25 @@ Feature: Get Bundles for Active Subscription
     	|TC   |bundleType|
    		|TC242|Group     |
    		
+   @noBundlesPrimary
+    Examples:
+    	|TC   |bundleType|
+   		|TC243|no        |
+   		
   @GetBundles @Drop1
 	Scenario Outline: <TC> GetBundles by providing <Identifier> serviceIdentifier and <bundleType> bundle
 		Given Input Get Request 
 		When "GetBundles" API is called with <Validity> attributes
     Then Validate the <errorCode> code, status and message in "GetBundles" output response
-    
-    @SecondarySubscription
-    Examples:
-    	|TC   |bundleType|Validity|errorCode|Identifier|
-    	|TC243|without   |"Server"|"ERR2024"|Valid     |
     	
     @CancelSubscription
     	Examples:
     	|TC   |bundleType|Validity  |errorCode|Identifier|
-    	|TC244|base      |"Inactive"|"ERR3023"|Inactive  |
+    	|TC244|base      |"Inactive"|"ERR3030"|Inactive  |
     	
     	Examples:
     	|TC   |bundleType|Validity |errorCode|Identifier    |
-    	|TC245|base      |"Invalid"|"ERR3023"|Non-existant  |
+    	|TC245|base      |"Invalid"|"ERR3030"|Non-existant  |
     	
   @GetBundles @Drop1
 	Scenario: TC246 GetBundles without providing serviceIdentifier

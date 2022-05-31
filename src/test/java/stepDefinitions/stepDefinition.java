@@ -327,6 +327,8 @@ public class stepDefinition extends ReUsableMethods {
 			inputRequest = ChangeServiceIdentifier_Data.inputRequestPayload("TC203", primaryServiceIdentifier);
 		else if (validity.contentEquals("Missing"))
 			inputRequest = ChangeServiceIdentifier_Data.inputRequestPayload("TC205");
+		else if (validity.contentEquals("New"))
+			inputRequest = ChangeServiceIdentifier_Data.inputRequestPayload("TC209");
 		req = given().spec(givenHeader()).body(inputRequest);
 		getIdentifier = inputRequest.getNewServiceIdentifier();
 	}
@@ -369,26 +371,33 @@ public class stepDefinition extends ReUsableMethods {
 				output = req.when().post(getAPI("Subscription")).then().spec(postResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
 				output = req.when().post(getAPI("Subscription")).then().spec(failureResponse()).extract().response();
-			else if (Validity.contentEquals("Non-existant") || Validity.contentEquals("Existing")
-					|| Validity.contentEquals("Inactive"))
+			else if (Validity.contentEquals("Existing"))
 				output = req.when().post(getAPI("Subscription")).then().spec(existingResponse()).extract().response();
+			else if (Validity.contentEquals("Non-existant") || Validity.contentEquals("Inactive"))
+				output = req.when().post(getAPI("Subscription")).then().spec(notFoundResponse()).extract().response();
 			break;
 		case "AddRCCBundle":
 			if (Validity.contentEquals("Valid"))
 				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("RCCBundle")).then()
 						.spec(postResponse()).extract().response();
+			else if (Validity.contentEquals("Secondary"))
+				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("RCCBundle")).then()
+				.spec(bundleResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
 				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("RCCBundle")).then()
 						.spec(failureResponse()).extract().response();
 			else if (Validity.contentEquals("Missing"))
 				output = req.when().post(getAPI("Subscription") + getAPI("RCCBundle")).then().spec(notFoundResponse())
 						.extract().response();
-			else if (Validity.contentEquals("Inactive") || Validity.contentEquals("Existant"))
+			else if (Validity.contentEquals("Inactive"))
+				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("RCCBundle")).then()
+						.spec(notFoundResponse()).extract().response();
+			else if (Validity.contentEquals("Existant"))
 				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("RCCBundle")).then()
 						.spec(existingResponse()).extract().response();
 			else if (Validity.contentEquals("Non-existant"))
 				output = req.when().post(getAPI("Subscription") + "000" + getAPI("RCCBundle")).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 			break;
 		case "DeleteSubscription":
 			if (Validity.contentEquals("Valid"))
@@ -398,7 +407,7 @@ public class stepDefinition extends ReUsableMethods {
 				output = req.when().delete(getAPI("Subscription")).then().spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Inactive") || Validity.contentEquals("Non-Existant"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 			break;
 		case "DeletePrimarySubscription":
 			if (Validity.contentEquals("Valid"))
@@ -416,14 +425,18 @@ public class stepDefinition extends ReUsableMethods {
 						.spec(failureResponse()).extract().response();
 			else if (Validity.contentEquals("Non-existant"))
 				output = req.when().post(getAPI("Subscription") + "000" + getAPI("ServiceIdentifier")).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Missing"))
 				output = req.when().post(getAPI("Subscription") + getAPI("ServiceIdentifier")).then()
 						.spec(notFoundResponse()).extract().response();
-			else if (Validity.contentEquals("Existing") || Validity.contentEquals("Inactive"))
+			else if (Validity.contentEquals("Existing"))
 				output = req.when()
 						.post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("ServiceIdentifier")).then()
 						.spec(existingResponse()).extract().response();
+			else if (Validity.contentEquals("Inactive"))
+				output = req.when()
+						.post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("ServiceIdentifier")).then()
+						.spec(notFoundResponse()).extract().response();
 			break;
 		case "AddBundle":
 			if (Validity.contentEquals("Valid"))
@@ -438,27 +451,30 @@ public class stepDefinition extends ReUsableMethods {
 			else if (Validity.contentEquals("Missing"))
 				output = req.when().post(getAPI("Subscription") + getAPI("Bundle")).then().spec(notFoundResponse())
 						.extract().response();
-			else if (Validity.contentEquals("Inactive") || Validity.contentEquals("Existing"))
+			else if (Validity.contentEquals("Existing"))
 				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
 						.spec(existingResponse()).extract().response();
+			else if (Validity.contentEquals("Inactive"))
+				output = req.when().post(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
+						.spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Non-existant"))
 				output = req.when().post(getAPI("Subscription") + "000" + getAPI("Bundle")).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 
 			break;
 		case "GetBundles":
 			if (Validity.contentEquals("Valid"))
 				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
 						.spec(successResponse()).extract().response();
-			else if (Validity.contentEquals("Server"))
+			else if (Validity.contentEquals("Secondary"))
 				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
-						.spec(serverResponse()).extract().response();
+						.spec(bundleResponse()).extract().response();
 			else if (Validity.contentEquals("Inactive"))
 				output = req.when().get(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
 				output = req.when().get(getAPI("Subscription") + "0000" + getAPI("Bundle")).then()
-						.spec(existingResponse()).extract().response();
+						.spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Missing"))
 				output = req.when().get(getAPI("Subscription") + getAPI("Bundle")).then().spec(notFoundResponse())
 						.extract().response();
@@ -469,9 +485,9 @@ public class stepDefinition extends ReUsableMethods {
 						.delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
 								+ testData.TestData.roamingBundleCode)
 						.then().spec(deleteResponse()).extract().response();
-			else if (Validity.contentEquals("AddOn"))
+			else if (Validity.contentEquals("Valid AddOn"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
-						+ testData.TestData.addOnBundleCode).then().spec(bundleResponse()).extract().response();
+						+ testData.TestData.addOnBundleCode).then().spec(deleteResponse()).extract().response();
 			else if (Validity.contentEquals("Base"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
 						+ testData.TestData.bundleCode).then().spec(bundleResponse()).extract().response();
@@ -480,7 +496,7 @@ public class stepDefinition extends ReUsableMethods {
 						+ testData.TestData.RCCBundleCode).then().spec(bundleResponse()).extract().response();
 			else if (Validity.contentEquals("Conflict"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
-						+ testData.TestData.RCCBundleCode).then().spec(existingResponse()).extract().response();
+						+ testData.TestData.bundleCode).then().spec(bundleResponse()).extract().response();
 			else if (Validity.contentEquals("Invalid"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle") + "ABC")
 						.then().spec(failureResponse()).extract().response();
@@ -488,7 +504,7 @@ public class stepDefinition extends ReUsableMethods {
 				output = req.when()
 						.delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")
 								+ testData.TestData.roamingBundleCode)
-						.then().spec(existingResponse()).extract().response();
+						.then().spec(notFoundResponse()).extract().response();
 			else if (Validity.contentEquals("Missing Bundle"))
 				output = req.when().delete(getAPI("Subscription") + primaryServiceIdentifier + getAPI("Bundle")).then()
 						.spec(notFoundResponse()).extract().response();
@@ -498,7 +514,7 @@ public class stepDefinition extends ReUsableMethods {
 			else if (Validity.contentEquals("Non-existant"))
 				output = req.when()
 						.delete(getAPI("Subscription") + "000" + getAPI("Bundle") + testData.TestData.roamingBundleCode)
-						.then().spec(existingResponse()).extract().response();
+						.then().spec(notFoundResponse()).extract().response();
 			break;
 		case "GetSubscription":
 			if (Validity.contentEquals("Valid"))
@@ -522,10 +538,10 @@ public class stepDefinition extends ReUsableMethods {
 				assertEquals(responseBody.getStatus(), getResponseStatus("post"));
 			else if (code.contentEquals("ERR1001"))
 				assertEquals(responseBody.getStatus(), getResponseStatus("failure"));
-			else if (code.contains("ERR3"))
-				assertEquals(responseBody.getStatus(), getResponseStatus("existing"));
-			else if (code.contains("ERR2"))
-				assertEquals(responseBody.getStatus(), getResponseStatus("server"));
+			else if (code.contentEquals("ERR3030") || code.contentEquals("ERR3024"))
+				assertEquals(responseBody.getStatus(), getResponseStatus("notFound"));
+			else if (code.contentEquals("ERR3031") || code.contains("ERR102"))
+				assertEquals(responseBody.getStatus(), getResponseStatus("default"));
 			if (responseBody.getErrors() != null) {
 				if (!responseBody.getErrors().isEmpty()) {
 					System.out.println(responseBody.getErrors().get(0).getMessage());
@@ -541,6 +557,10 @@ public class stepDefinition extends ReUsableMethods {
 				assertEquals(responseBody1.getStatus(), getResponseStatus("post"));
 			else if (code.contentEquals("ERR1001"))
 				assertEquals(responseBody1.getStatus(), getResponseStatus("failure"));
+			else if (code.contains("ERR3030"))
+				assertEquals(responseBody1.getStatus(), getResponseStatus("notFound"));
+			else if (code.contains("ERR3031"))
+				assertEquals(responseBody1.getStatus(), getResponseStatus("default"));
 			else if (code.contains("ERR3"))
 				assertEquals(responseBody1.getStatus(), getResponseStatus("existing"));
 			else if (code.contains("ERR2"))
@@ -559,6 +579,8 @@ public class stepDefinition extends ReUsableMethods {
 				assertEquals(responseBody2.getStatus(), getResponseStatus("post"));
 			else if (code.contentEquals("ERR1001"))
 				assertEquals(responseBody2.getStatus(), getResponseStatus("failure"));
+			else if (code.contains("ERR3030"))
+				assertEquals(responseBody2.getStatus(), getResponseStatus("notFound"));
 			else if (code.contains("ERR3"))
 				assertEquals(responseBody2.getStatus(), getResponseStatus("existing"));
 			if (responseBody2.getErrors() != null) {
@@ -573,6 +595,8 @@ public class stepDefinition extends ReUsableMethods {
 			assertEquals(responseBody3.getCode(), code);
 			if (code.contentEquals("ERR1001"))
 				assertEquals(responseBody3.getStatus(), getResponseStatus("failure"));
+			if (code.contentEquals("ERR3030"))
+				assertEquals(responseBody3.getStatus(), getResponseStatus("notFound"));
 			else if (code.contains("ERR3"))
 				assertEquals(responseBody3.getStatus(), getResponseStatus("existing"));
 			else if (code.contains("ERR2"))
@@ -591,33 +615,33 @@ public class stepDefinition extends ReUsableMethods {
 		switch (api) {
 		case "GetBundles":
 			getBundlesResponse responseBody1 = output.getBody().as(getBundlesResponse.class);
-			if (!responseBody1.getBaseBundle().isEmpty()) {
-				int length = responseBody1.getBaseBundle().size();
+			if (!responseBody1.getBaseBundles().isEmpty()) {
+				int length = responseBody1.getBaseBundles().size();
 				for (int i = 0; i < length; i++) {
-					assertEquals("Active", responseBody1.getBaseBundle().get(i).getStatus());
-					assertEquals(testData.TestData.on, responseBody1.getBaseBundle().get(i).getNotifications());
-					if (responseBody1.getBaseBundle().get(i).getBundleType().contentEquals("Base")) {
+					assertEquals("Active", responseBody1.getBaseBundles().get(i).getStatus());
+					assertEquals(testData.TestData.on, responseBody1.getBaseBundles().get(i).getNotifications());
+					if (responseBody1.getBaseBundles().get(i).getBundleType().contentEquals("Base")) {
 						assertEquals(testData.TestData.bundleCode,
-								responseBody1.getBaseBundle().get(i).getBundleCode());
+								responseBody1.getBaseBundles().get(i).getBundleCode());
 					} else {
-						assertEquals("Addon", responseBody1.getBaseBundle().get(i).getBundleType());
+						assertEquals("Addon", responseBody1.getBaseBundles().get(i).getBundleType());
 						assertEquals(testData.TestData.addOnBundleCode,
-								responseBody1.getBaseBundle().get(i).getBundleCode());
+								responseBody1.getBaseBundles().get(i).getBundleCode());
 					}
 				}
 			}
-			if (!responseBody1.getRoamingBundle().isEmpty()) {
-				assertEquals("Active", responseBody1.getRoamingBundle().get(0).getStatus());
-				assertEquals(testData.TestData.off, responseBody1.getRoamingBundle().get(0).getNotifications());
-				assertEquals("Roaming", responseBody1.getRoamingBundle().get(0).getBundleType());
+			if (!responseBody1.getRoamingBundles().isEmpty()) {
+				assertEquals("Active", responseBody1.getRoamingBundles().get(0).getStatus());
+				assertEquals(testData.TestData.off, responseBody1.getRoamingBundles().get(0).getNotifications());
+				assertEquals("Roaming", responseBody1.getRoamingBundles().get(0).getBundleType());
 				assertEquals(testData.TestData.roamingBundleCode,
-						responseBody1.getRoamingBundle().get(0).getBundleCode());
+						responseBody1.getRoamingBundles().get(0).getBundleCode());
 			}
-			if (!responseBody1.getRccBundle().isEmpty()) {
-				assertEquals("Active", responseBody1.getRccBundle().get(0).getStatus());
-				assertEquals(testData.TestData.off, responseBody1.getRccBundle().get(0).getNotifications());
-				assertEquals("RCC", responseBody1.getRccBundle().get(0).getBundleType());
-				assertEquals(testData.TestData.RCCBundleCode, responseBody1.getRccBundle().get(0).getBundleCode());
+			if (!responseBody1.getRccBundles().isEmpty()) {
+				assertEquals("Active", responseBody1.getRccBundles().get(0).getStatus());
+				assertEquals(testData.TestData.off, responseBody1.getRccBundles().get(0).getNotifications());
+				assertEquals("RCC", responseBody1.getRccBundles().get(0).getBundleType());
+				assertEquals(testData.TestData.RCCBundleCode, responseBody1.getRccBundles().get(0).getBundleCode());
 			}
 			break;
 		}
@@ -629,6 +653,14 @@ public class stepDefinition extends ReUsableMethods {
 		System.out.println(responseBody.getError());
 		assertEquals(responseBody.getStatus(), getResponseStatus("notFound"));
 
+	}
+	
+	public void primarySubscription() throws IOException {
+		provision.primarySubscription<Integer> inputRequest = PrimarySubscription_Data.inputRequestPayload();
+		req = given().spec(givenHeader()).body(inputRequest);
+		primaryServiceIdentifier = inputRequest.getServiceIdentifier();
+		imsi = inputRequest.getImsi();
+		alternateNumber = inputRequest.getServiceInfo().getPreferences().getAlternateNumber();
 	}
 
 }

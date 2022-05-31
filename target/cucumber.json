@@ -1,0 +1,157 @@
+[
+  {
+    "line": 1,
+    "elements": [
+      {
+        "start_timestamp": "2022-05-26T07:56:19.795Z",
+        "before": [
+          {
+            "result": {
+              "duration": 6000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.start(io.cucumber.java.Scenario)"
+            }
+          },
+          {
+            "result": {
+              "duration": 11305000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.primarySubscription()"
+            }
+          }
+        ],
+        "line": 60,
+        "name": "TC225 AddBundle by providing valid serviceIdentifier and multiple \"AddOn\" bundle",
+        "description": "",
+        "id": "purchase-base/roaming/addon-bundles;\u003ctc\u003e-addbundle-by-providing-valid-serviceidentifier-and-multiple-\u003cbundletype\u003e-bundle;;2",
+        "after": [
+          {
+            "result": {
+              "duration": 2000000,
+              "status": "passed"
+            },
+            "match": {
+              "location": "stepDefinitions.Hooks.stop()"
+            }
+          }
+        ],
+        "type": "scenario",
+        "keyword": "Scenario Outline",
+        "steps": [
+          {
+            "result": {
+              "duration": 53000000,
+              "status": "passed"
+            },
+            "line": 53,
+            "name": "Input Request with \"AddOn\" bundle \"with\" properties",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"AddOn\"",
+                  "offset": 19
+                },
+                {
+                  "val": "\"with\"",
+                  "offset": 34
+                }
+              ],
+              "location": "stepDefinitions.stepDefinition.input_request_with_bundle(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Given "
+          },
+          {
+            "result": {
+              "duration": 1098000000,
+              "status": "passed"
+            },
+            "line": 54,
+            "name": "\"AddBundle\" API is called with \"Valid\" attributes",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"AddBundle\"",
+                  "offset": 0
+                },
+                {
+                  "val": "\"Valid\"",
+                  "offset": 31
+                }
+              ],
+              "location": "stepDefinitions.stepDefinition.api_is_called_with_attributes(java.lang.String,java.lang.String)"
+            },
+            "keyword": "When "
+          },
+          {
+            "result": {
+              "duration": 694000000,
+              "status": "passed"
+            },
+            "line": 55,
+            "name": "\"AddBundle\" API is called with \"Existing\" attributes",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"AddBundle\"",
+                  "offset": 0
+                },
+                {
+                  "val": "\"Existing\"",
+                  "offset": 31
+                }
+              ],
+              "location": "stepDefinitions.stepDefinition.api_is_called_with_attributes(java.lang.String,java.lang.String)"
+            },
+            "keyword": "And "
+          },
+          {
+            "result": {
+              "duration": 33000000,
+              "status": "passed"
+            },
+            "line": 56,
+            "name": "Validate the \"ERR3026\" code, status and message in \"AddBundle\" output response",
+            "match": {
+              "arguments": [
+                {
+                  "val": "\"ERR3026\"",
+                  "offset": 13
+                },
+                {
+                  "val": "\"AddBundle\"",
+                  "offset": 51
+                }
+              ],
+              "location": "stepDefinitions.stepDefinition.validate_the_code_status_and_message_in_output_response(java.lang.String,java.lang.String)"
+            },
+            "keyword": "Then "
+          }
+        ],
+        "tags": [
+          {
+            "name": "@AddBundle"
+          },
+          {
+            "name": "@PrimarySubscription"
+          },
+          {
+            "name": "@Drop1"
+          },
+          {
+            "name": "@Test123"
+          }
+        ]
+      }
+    ],
+    "name": "Purchase Base/Roaming/Addon Bundles",
+    "description": "",
+    "id": "purchase-base/roaming/addon-bundles",
+    "keyword": "Feature",
+    "uri": "file:src/test/java/features/13.AddBundle.feature",
+    "tags": []
+  }
+]

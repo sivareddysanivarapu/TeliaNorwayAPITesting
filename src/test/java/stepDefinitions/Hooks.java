@@ -43,6 +43,17 @@ public class Hooks {
 		m.validate_the_code_status_and_message_in_output_response("000", "AddSubscription");
 		Decorators.prerequisiteEnd();
 	}
+	
+	@Before("@noBundlesPrimary")
+	public static void noBundlesPrimary() throws IOException {
+		Decorators.prerequisiteStart();
+		stepDefinition m = new stepDefinition();
+		m.primarySubscription();;
+		m.api_is_called_with_attributes("AddSubscription", "Valid");
+		m.validate_the_code_status_and_message_in_output_response("000", "AddSubscription");
+		Decorators.prerequisiteEnd();
+	}
+
 
 	@Before("@PurchaseRCCBundle")
 	public static void purchaseRCCBundle() throws IOException {

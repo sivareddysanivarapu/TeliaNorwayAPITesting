@@ -47,6 +47,7 @@ public class ReUsableMethods{
 				//.addHeader("orderId", getOrderID())
 				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
 				//.addHeader("access_token", stepDefinition.accessToken)
+				.addHeader("countryCode", getGlobalValues("countryCode"))
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log))
 				.setContentType(ContentType.JSON).build();
@@ -57,6 +58,7 @@ public class ReUsableMethods{
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
 				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
 				//.addHeader("access_token", stepDefinition.accessToken)
+				.addHeader("countryCode", getGlobalValues("countryCode"))
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log))
 				.setContentType(ContentType.JSON).build();
@@ -67,6 +69,7 @@ public class ReUsableMethods{
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
 				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
 				//.addHeader("access_token", stepDefinition.accessToken)
+				.addHeader("countryCode", getGlobalValues("countryCode"))
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log)).build();
 	}
@@ -76,6 +79,7 @@ public class ReUsableMethods{
 		return new RequestSpecBuilder().setBaseUri(getGlobalValues("baseUrl"))
 				//.addHeader("X-OAUTH-IDENTITY-DOMAIN-NAME","APIDomain")
 				//.addHeader("access_token", stepDefinition.accessToken)
+				.addHeader("countryCode", getGlobalValues("countryCode"))
 				.addFilter(RequestLoggingFilter.logRequestTo(log))
 				.addFilter(ResponseLoggingFilter.logResponseTo(log)).build();
 	}

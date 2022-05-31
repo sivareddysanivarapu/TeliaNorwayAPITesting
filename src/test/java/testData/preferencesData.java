@@ -27,9 +27,24 @@ public class preferencesData extends TestData{
 		input.setBrandInfo(brandInfo);
 		input.setServiceProviderId(serviceProviderId);
 		input.setSubscriptionType(subscriptionType);
+		if(brandType == "phonero") {
+			input.setBrandInfo(phoneroBrandInfo);
+		}
+		return input;
+	}
+	
+	public static preferences preferencesSecondaryMandatory(String brandType) {
+
+		preferences input = new preferences();
+		input.setLanguage(language);
+		input.setTcId(tcId);
+		input.setSubscriptionType(subscriptionType);
+		input.setChannel(channel);
+		input.setEmailAddress(emailAddress);
 		input.setAlternateNumber(ReUsableMethods.getCurrentDateTimeMS() + "9");
 		if(brandType == "phonero") {
 			input.setBrandInfo(phoneroBrandInfo);
+			input.setNotificationPrice(notificationPrice);
 		}
 		return input;
 	}

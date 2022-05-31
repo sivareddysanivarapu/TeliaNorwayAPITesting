@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<testsuite errors="0" failures="0" name="io.cucumber.core.plugin.JUnitFormatter" skipped="0" tests="1" time="14.272">
+<testcase classname="Purchase Base/Roaming/Addon Bundles" name="TC225 AddBundle by providing valid serviceIdentifier and multiple &quot;AddOn&quot; bundle" time="13.377">
+<system-out><![CDATA[Given Input Request with "AddOn" bundle "with" properties...................passed
+When "AddBundle" API is called with "Valid" attributes......................passed
+And "AddBundle" API is called with "Existing" attributes....................passed
+Then Validate the "ERR3026" code, status and message in "AddBundle" output response.passed
+]]></system-out>
+</testcase>
+</testsuite>

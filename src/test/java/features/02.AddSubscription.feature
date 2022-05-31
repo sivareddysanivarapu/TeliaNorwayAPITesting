@@ -10,7 +10,7 @@ Feature: Add secondary subscription
     Examples:
     	|TC   |attribute      |Validity      |errorCode|Identifier|
     	|TC055|"all"          |"Valid"       |"000"    |One       |
-    	|TC056|"Invalid"      |"Non-existant"|"ERR3023"|One       |
+    	|TC056|"Invalid"      |"Non-existant"|"ERR3030"|One       |
     	|TC057|"onlyMandatory"|"Valid"       |"000"    |One       |
     	
     @SecondarySubscription
@@ -22,5 +22,5 @@ Feature: Add secondary subscription
     @CancelSubscription
     Examples:
     	|TC   |attribute |Validity  |errorCode|Identifier|
-    	|TC059|"Inacitve"|"Inacitve"|"ERR3023"|Single    |
+    	|TC059|"Inactive"|"Inactive"|"ERR3030"|Single    |
  

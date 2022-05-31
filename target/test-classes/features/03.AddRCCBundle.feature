@@ -28,16 +28,16 @@ Feature: Purchase RCC Bundle
     @CancelSubscription
     Examples:
     	|TC   |Validity|Valid     |errorCode|
-    	|TC071|Inactive|"Inactive"|"ERR3023"|
+    	|TC071|Inactive|"Inactive"|"ERR3030"|
     	
     @SecondarySubscription
     Examples:
-    	|TC   |Validity |Valid    |errorCode|
-    	|TC072|Secondary|"Invalid"|"ERR3023"|
+    	|TC   |Validity |Valid      |errorCode|
+    	|TC072|Secondary|"Secondary"|"ERR3031"|
     	
     Examples:
     	|TC   |Validity    |Valid         |errorCode|
-    	|TC073|Non-existant|"Non-existant"|"ERR3023"|
+    	|TC073|Non-existant|"Non-existant"|"ERR3030"|
     	
     @PrimarySubscription
     Examples:

@@ -1,0 +1,7 @@
+
+@AddBundle @PrimarySubscription @Drop1 @Test123
+Scenario Outline: TC225 AddBundle by providing valid serviceIdentifier and multiple "AddOn" bundle # src/test/java/features/13.AddBundle.feature:60
+  Given Input Request with "AddOn" bundle "with" properties                                        # stepDefinitions.stepDefinition.input_request_with_bundle(java.lang.String,java.lang.String)
+  When "AddBundle" API is called with "Valid" attributes                                           # stepDefinitions.stepDefinition.api_is_called_with_attributes(java.lang.String,java.lang.String)
+  And "AddBundle" API is called with "Existing" attributes                                         # stepDefinitions.stepDefinition.api_is_called_with_attributes(java.lang.String,java.lang.String)
+  Then Validate the "ERR3026" code, status and message in "AddBundle" output response              # stepDefinitions.stepDefinition.validate_the_code_status_and_message_in_output_response(java.lang.String,java.lang.String)

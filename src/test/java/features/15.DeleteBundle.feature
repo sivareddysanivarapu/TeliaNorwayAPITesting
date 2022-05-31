@@ -9,6 +9,7 @@ Feature: Delete Base/Roaming/AddOn bundles
 		Examples:
 			|TC   |bundleType     |
 			|TC255|"Valid Roaming"|
+			|TC268|"Valid AddOn"  |
 			
 	@DeleteBundle @Drop1
 	Scenario Outline: <TC> DeleteBundle by providing <Validity> service identifier and <bundleType> Bundle code
@@ -26,16 +27,12 @@ Feature: Delete Base/Roaming/AddOn bundles
 		@CancelBundle
 		Examples:
 			|TC   |bundleType|Validity|valid     |errorCode|
-			|TC263|Inactive  |Valid   |"Inactive"|"ERR3025"|
+			|TC263|Inactive  |Valid   |"Inactive"|"ERR3024"|
 			
-		@SecondarySubscription
+		@noBundlesPrimary
 		Examples:
 			|TC   |bundleType|Validity|valid     |errorCode|
-			|TC266|No        |Valid   |"Conflict"|"ERR3024"|	
-			
-		@BundleGroup
-		Examples:
-			|TC268|AddOn     |Valid   |"AddOn"  |"ERR1044"|
+			|TC266|No        |Valid   |"Inactive"|"ERR3024"|	
 			
 	@DeleteBundle @Drop1
 	Scenario Outline: <TC> DeleteBundle by providing <Validity> service identifier and <bundleType> Bundle code
@@ -58,13 +55,13 @@ Feature: Delete Base/Roaming/AddOn bundles
 		@CancelSubscription
 		Examples:
 			|TC   |bundleType|Validity|valid     |errorCode|
-			|TC260|Inactive  |Valid   |"Inactive"|"ERR3023"|	
+			|TC260|Inactive  |Valid   |"Inactive"|"ERR3030"|	
 			
 		Examples:
 			|TC   |bundleType|Validity       |valid         |errorCode|
-			|TC261|Valid     |Non-Existant   |"Non-existant"|"ERR3023"|
+			|TC261|Valid     |Non-Existant   |"Non-existant"|"ERR3030"|
 			
 		@SecondarySubscription
 		Examples:
 			|TC   |bundleType|Validity |valid     |errorCode|
-			|TC262|Valid     |Secondary|"Inactive"|"ERR3024"|
+			|TC262|Valid     |Secondary|"Conflict"|"ERR3031"|

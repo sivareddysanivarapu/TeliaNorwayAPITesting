@@ -10,7 +10,7 @@ Feature: Change Service Identifier of a Subscription
     Examples:
     	|TC   |Validity      |errorCode|newValidity|Identifier|
     	|TC199|"Valid"       |"000"    |"Valid"    |Primary   |
-    	|TC201|"Non-existant"|"ERR3023"|"Valid"    |Primary   |
+    	|TC201|"Non-existant"|"ERR3030"|"Valid"    |Primary   |
     	|TC202|"Invalid"     |"ERR1001"|"Invalid"  |Primary   |
     	|TC203|"Existing"    |"ERR3021"|"Existing" |Primary   |
     	|TC205|"Invalid"     |"ERR1001"|"Missing"  |Primary   |
@@ -24,12 +24,12 @@ Feature: Change Service Identifier of a Subscription
     @CancelSubscription
     Examples:
     	|TC   |Validity      |errorCode|newValidity|Identifier|
-    	|TC207|"Valid"       |"ERR3023"|"Inactive" |Inactive  |
+    	|TC207|"Inactive"    |"ERR3030"|"Valid"    |Inactive  |
     	
     @ModifyServiceIdentifier
     Examples:
     	|TC   |Validity      |errorCode|newValidity|Identifier|
-    	|TC209|"Inactive"    |"ERR3021"|"Valid"    |Old       |
+    	|TC209|"Inactive"    |"ERR3030"|"New"      |Old       |
   
   @ChangeServiceIdentifier @Drop1
   Scenario: TC204 Change Service Identifier of Subscription with missing Old Service Identifier

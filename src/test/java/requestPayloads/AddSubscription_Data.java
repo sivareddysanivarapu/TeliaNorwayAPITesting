@@ -17,7 +17,7 @@ public class AddSubscription_Data {
 		preferences inputPreferences = null;
 
 		if (testCase == "TC055") {
-			inputPreferences = preferencesData.preferencesInputMandatory(" ");
+			inputPreferences = preferencesData.preferencesSecondaryMandatory(" ");
 		} 
 
 		// Notification Payload

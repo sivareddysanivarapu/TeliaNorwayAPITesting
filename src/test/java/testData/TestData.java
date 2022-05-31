@@ -39,19 +39,19 @@ public class TestData {
 	public static String tcId = "iol406";
 
 	// Mandatory Subscription Data
-	public static String subscriptionMode = "postpaid";
-	protected static String prepaidSubscriptionMode = "prepaid";
+	public static String subscriptionMode = "Postpaid";
+	protected static String prepaidSubscriptionMode = "Prepaid";
 	protected static String existingServiceIdentifier = "1000";
 	protected static String existingImsi = "1001";
 	protected static String invalidSubscriptionMode = "Invalid";
 	
 	//Mandatory Bundle Data
-	public static String bundleCode = "B0001";
-	public static String roamingBundleCode = "Roam0001";
-	public static String RCCBundleCode = "RCC0001";
-	public static String topupBundleCode = "TopUp0008";
-	public static String roamTopupBundleCode = "TopUp0008";
-	public static String addOnBundleCode = "AddOn0005";
+	public static String bundleCode = "NOMT-123";
+	public static String roamingBundleCode = "NOMT-R01";
+	public static String RCCBundleCode = "NOMT-RCC";
+	public static String topupBundleCode = "NOMT-RANTSONE0D";
+	public static String roamTopupBundleCode = "NOMT-RAS0B3";
+	public static String addOnBundleCode = "NOMT-Boost";
 	protected static String invalidCode = "000";
 	
 	//Mandatory Bundle Properties Data
@@ -63,7 +63,7 @@ public class TestData {
 	protected static String modifiedBillingFrequency = "Quarterly";
 	
 	//CR23 Test Data
-	protected static String newSubscriptionMode = "prepaid";
+	protected static String newSubscriptionMode = "Prepaid";
 	
 	
 }

@@ -1,0 +1,69 @@
+[
+  {
+    "source": "Input Request with {string} bundle {string} properties",
+    "steps": [
+      {
+        "name": "Input Request with \"AddOn\" bundle \"with\" properties",
+        "aggregatedDurations": {
+          "median": 0.053,
+          "average": 0.053
+        },
+        "durations": [
+          {
+            "duration": 0.053,
+            "location": "file:///C:/Users/ashok.surasani/eclipse-workspace/teliaAPIAutomation/teliaNorwayAPITesting/src/test/java/features/13.AddBundle.feature:53"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "{string} API is called with {string} attributes",
+    "steps": [
+      {
+        "name": "\"AddBundle\" API is called with \"Valid\" attributes",
+        "aggregatedDurations": {
+          "median": 1.098,
+          "average": 1.098
+        },
+        "durations": [
+          {
+            "duration": 1.098,
+            "location": "file:///C:/Users/ashok.surasani/eclipse-workspace/teliaAPIAutomation/teliaNorwayAPITesting/src/test/java/features/13.AddBundle.feature:54"
+          }
+        ]
+      },
+      {
+        "name": "\"AddBundle\" API is called with \"Existing\" attributes",
+        "aggregatedDurations": {
+          "median": 0.694,
+          "average": 0.694
+        },
+        "durations": [
+          {
+            "duration": 0.694,
+            "location": "file:///C:/Users/ashok.surasani/eclipse-workspace/teliaAPIAutomation/teliaNorwayAPITesting/src/test/java/features/13.AddBundle.feature:55"
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "source": "Validate the {string} code, status and message in {string} output response",
+    "steps": [
+      {
+        "name": "Validate the \"ERR3026\" code, status and message in \"AddBundle\" output response",
+        "aggregatedDurations": {
+          "median": 0.033,
+          "average": 0.033
+        },
+        "durations": [
+          {
+            "duration": 0.033,
+            "location": "file:///C:/Users/ashok.surasani/eclipse-workspace/teliaAPIAutomation/teliaNorwayAPITesting/src/test/java/features/13.AddBundle.feature:56"
+          }
+        ]
+      }
+    ]
+  }
+]

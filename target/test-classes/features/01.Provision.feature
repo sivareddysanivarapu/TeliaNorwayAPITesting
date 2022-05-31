@@ -19,27 +19,27 @@ Feature: Provision Subscription with Bundles
     Then Validate the <errorCode> code, status and message in "Provision" output response  
     
     Examples:
-    	|TC   |function  |Validity      |errorCode|
-    	|TC003|"dataType"|"Invalid"     |"ERR1000"|
-    	|TC033|"bundle"  |"Non-existing"|"ERR2007"|
+    	|TC   |function  |Validity |errorCode|
+    	|TC003|"dataType"|"Invalid"|"ERR1000"|
+    	|TC033|"bundle"  |"Invalid"|"ERR1001"|
     
   @Provision @Drop1
   Scenario Outline: <TC> Provision with Missing mandatory <attribute>
     Given Input Request with missing mandatory <attribute>
-    When "Provision" API is called with "Missing" attributes
-    Then Validate the "ERR1001" code, status and message in "Provision" output response
+    When "Provision" API is called with <Validity> attributes
+    Then Validate the <errorCode> code, status and message in "Provision" output response
     
     Examples:
-    	|TC   |attribute          |
-    	|TC004|"serviceIdentifier"|
-    	|TC005|"IMSI"             |
-    	|TC006|"subscriptionMode" |
-    	|TC009|"customerType"     |
-    	|TC011|"bdom"             |
-    	|TC012|"billingFrequency" |
-    	|TC015|"language"         |
-    	|TC016|"serviceProviderID"|
-    	|TC017|"subscriptionType" |
+    	|TC   |attribute          |Validity |errorCode|
+    	|TC004|"serviceIdentifier"|"Missing"|"ERR1001"|
+    	|TC005|"IMSI"             |"Missing"|"ERR1001"|
+    	|TC006|"subscriptionMode" |"Missing"|"ERR1001"|
+    	|TC009|"customerType"     |"Missing"|"ERR1001"|
+    	|TC011|"bdom"             |"Missing"|"ERR1001"|
+    	|TC012|"billingFrequency" |"Missing"|"ERR1001"|
+    	|TC015|"language"         |"Missing"|"ERR1001"|
+    	|TC016|"serviceProviderID"|"Missing"|"ERR1001"|
+    	|TC017|"subscriptionType" |"Valid"  |"000"    |
 
   @Provision @Drop1
   Scenario Outline: <TC> Provision with Length>15 for <attribute>
@@ -167,9 +167,9 @@ Feature: Provision Subscription with Bundles
     Then Validate the <errorCode> code, status and message in "Provision" output response
     
     Examples:
-    	|TC   |attribute        |errorCode|Validity |
-    	|TC046|"emailAddress"   |"000"    |"Valid"  |
-    	|TC047|"alternateNumber"|"ERR1001"|"Missing"|
+    	|TC   |attribute        |errorCode|Validity|
+    	|TC046|"emailAddress"   |"000"    |"Valid" |
+    	|TC047|"alternateNumber"|"000"    |"Valid" |
     
   @Provision @Drop1
   Scenario Outline: <TC> Provision of Prepaid Subscription without IMSI and <attribute>

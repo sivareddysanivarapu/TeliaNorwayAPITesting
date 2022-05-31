@@ -17,6 +17,8 @@ public class ChangeServiceIdentifier_Data {
 			input.setNewServiceIdentifier(predata[0]);
 		else if(testCase == "TC208")
 			input.setNewServiceIdentifier(" ");
+		else if(testCase == "TC209")
+			input.setNewServiceIdentifier(ReUsableMethods.getCurrentDateTimeMS() + "8");
 		else
 			input.setNewServiceIdentifier(null);
 		
